@@ -1,5 +1,7 @@
 # Relativistic Black Hole Simulator 🕳️
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white)](https://wjgoarxiv.github.io/blackhole-simulator/)
+
 An interactive, hyper-realistic WebGL simulation of a Schwarzschild black hole, featuring gravitational lensing, Doppler beaming, and a volumetric accretion disk.
 
 ## ✨ Features
