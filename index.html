@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Hole Simulator</title>
+  <script type="module" crossorigin src="./assets/index-1kA9KA3n.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BLF_CSbX.css">
+</head>
+
+<body>
+  <div id="app"></div>
+  <div id="hud">
+    <div id="crosshair">+</div>
+
+    <!-- Top Left: Title & Author -->
+    <div style="position: absolute; top: 20px; left: 20px; color: white; user-select: none;">
+      <h1 style="margin: 0; font-size: 24px; font-weight: 300; letter-spacing: 2px;">Blackhole simulator</h1>
+      <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">
+        Author: <a href="https://github.com/wjgoarxiv" target="_blank"
+          style="color: #4daafc; text-decoration: none;">wjgoarxiv</a>
+      </p>
+    </div>
+
+    <!-- Bottom Left: Guide -->
+    <div id="controls"
+      style="position: absolute; bottom: 20px; left: 20px; color: white; text-align: left; background: transparent; pointer-events: none;">
+      <p style="margin: 2px; text-shadow: 0px 0px 2px black;">Click to start</p>
+      <p style="margin: 2px; text-shadow: 0px 0px 2px black;"><b>WASD</b> to move | <b>Mouse</b> to look</p>
+      <p style="margin: 2px; text-shadow: 0px 0px 2px black;"><b>Space</b> / <b>Shift</b> to move Up / Down</p>
+    </div>
+
+    <!-- Metric HUD (Hidden by default) -->
+    <div id="metric-hud"
+      style="position: absolute; bottom: 20px; right: 20px; color: #0f0; text-align: right; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 4px; display: none; font-family: monospace; border: 1px solid #0f0;">
+      <div id="hud-dist">DISTANCE: 0.00 RS</div>
+      <div id="hud-vel">VELOCITY: 0.00 c</div>
+      <div id="hud-pos">POS: [0.0, 0.0, 0.0]</div>
+    </div>
+  </div>
+
+  <!-- Top Right: Dashboard UI -->
+  <div id="ui-overlay"
+    style="position: absolute; top: 20px; right: 20px; color: white; background: rgba(0,0,0,0.6); padding: 20px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); width: 200px; z-index: 1000;">
+    <div
+      style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; margin-bottom: 15px;">
+      <h3 style="margin: 0; font-size: 16px;">Controls</h3>
+      <button id="uiToggleBtn"
+        style="background: none; border: none; color: white; cursor: pointer; font-size: 12px;">[Hide]</button>
+    </div>
+
+    <div id="uiContent" style="transition: opacity 0.3s ease; overflow: hidden;">
+
+      <!-- Exposure -->
+      <div style="margin-bottom: 15px;">
+        <label for="exposureSlider"
+          style="display: block; margin-bottom: 5px; font-size: 12px; color: #aaa;">EXPOSURE</label>
+        <input type="range" id="exposureSlider" min="0.1" max="5.0" step="0.1" value="1.0"
+          style="width: 100%; cursor: pointer;">
+      </div>
+
+      <!-- Speed -->
+      <div style="margin-bottom: 15px;">
+        <label for="speedSlider" style="display: block; margin-bottom: 5px; font-size: 12px; color: #aaa;">WARP
+          SPEED</label>
+        <input type="range" id="speedSlider" min="1" max="100" step="1" value="25"
+          style="width: 100%; cursor: pointer;">
+      </div>
+
+      <!-- Disk Intensity -->
+      <div style="margin-bottom: 15px;">
+        <label for="diskSlider" style="display: block; margin-bottom: 5px; font-size: 12px; color: #aaa;">DISK
+          INTENSITY</label>
+        <input type="range" id="diskSlider" min="0.0" max="2.0" step="0.1" value="1.0"
+          style="width: 100%; cursor: pointer;">
+      </div>
+
+      <!-- Star Drift (Parallax) -->
+      <div style="margin-bottom: 15px;">
+        <label for="driftSlider" style="display: block; margin-bottom: 5px; font-size: 12px; color: #aaa;">STAR
+          DRIFT</label>
+        <input type="range" id="driftSlider" min="0.0" max="1.0" step="0.1" value="0.0"
+          style="width: 100%; cursor: pointer;">
+      </div>
+
+      <!-- Metric Grid -->
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <label for="gridToggle" style="font-size: 12px; color: #aaa; cursor: pointer;">METRIC GRID</label>
+        <input type="checkbox" id="gridToggle" style="cursor: pointer; transform: scale(1.2);">
+      </div>
+    </div> <!-- End uiContent -->
+
+    <script>
+      const toggleBtn = document.getElementById('uiToggleBtn');
+      const uiContent = document.getElementById('uiContent');
+      let isVisible = true;
+
+      toggleBtn.addEventListener('click', () => {
+        isVisible = !isVisible;
+        if (isVisible) {
+          uiContent.style.height = 'auto'; // Or specific pixel height for transition
+          uiContent.style.opacity = '1';
+          uiContent.style.pointerEvents = 'auto';
+          toggleBtn.innerText = '[Hide]';
+        } else {
+          uiContent.style.height = '0';
+          uiContent.style.opacity = '0';
+          uiContent.style.pointerEvents = 'none';
+          toggleBtn.innerText = '[Show]';
+        }
+      });
+    </script>
+  </div>
+</body>
+
+</html>
