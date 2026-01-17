@@ -1,0 +1,60 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color-scheme: dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #000;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+#app {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+#hud {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#crosshair {
+	font-size: 24px;
+	color: white;
+	opacity: 0.5;
+}
+
+#controls {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	font-size: 14px;
+	opacity: 0.7;
+	font-family: monospace;
+}

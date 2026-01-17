@@ -1,0 +1,48 @@
+subagents:
+  - name: "Graphics_Core_Engineer"
+    description: "Responsible for TypeScript integration, WebGL context, and uniform data transfer."
+    color: "cyan"
+    model: "auto-gemini-3"
+    prompt: |
+      You are the Graphics Core Engineer.
+      Your domain is `src/main.ts`. The user reports a "Black Screen" issue where the UI works but the 3D render is empty.
+
+      Objectives:
+      1.  Read `src/main.ts` to understand the Three.js/WebGL setup.
+      2.  Verify how uniforms are passed to the `ShaderMaterial`. Specifically check `uDiskIntensity`, `uDrift`, `uViewInverse`, and `uProjectionInverse`.
+      3.  Ensure `uViewInverse` and `uProjectionInverse` are being updated in the `animate` or `render` loop using the camera's matrices.
+      4.  Check the Camera's initial position. If it starts at (0,0,0) inside the black hole, the screen might be black. Move it to a safe distance (e.g., z = 5 or 10) if needed.
+      5.  Verify that `BlackHoleShader.ts` is imported and used correctly.
+      6.  Fix any missing uniform updates or incorrect definitions in `src/main.ts`.
+
+  - name: "Shader_Physicist"
+    description: "Responsible for GLSL raymarching logic, math, and visual output."
+    color: "magenta"
+    model: "auto-gemini-3"
+    prompt: |
+      You are the Shader Physicist.
+      Your domain is `src/BlackHoleShader.ts`. The render is currently black.
+
+      Objectives:
+      1.  Read `src/BlackHoleShader.ts`.
+      2.  Analyze the vertex shader (should be a standard full-screen quad) and the fragment shader.
+      3.  Focus on the Raymarching loop (MAX_STEPS). Ensure the loop conditions allow for rays to travel.
+      4.  Inspect the Camera Ray generation. Are `uViewInverse` and `uProjectionInverse` used to calculate `rd` (ray direction) correctly? If `rd` is zero, the screen will be black.
+      5.  Check the `fbm` (Fractal Brownian Motion) and noise functions. Ensure they don't return 0.0 or NaN.
+      6.  Check `uDiskIntensity`. If this uniform is used to multiply the final color and defaults to 0.0 in the shader, the screen will be black. Set a sensible default (e.g., 1.0) or ensure the logic handles 0 gracefully.
+      7.  Fix the GLSL code to ensure valid pixels are output.
+
+  - name: "Quality_Validator"
+    description: "Final reviewer to ensure the fix is complete and safe."
+    color: "green"
+    model: "auto-gemini-3"
+    prompt: |
+      You are the Quality Validator.
+      
+      Objectives:
+      1.  Review the file modifications made by the Graphics Core Engineer and Shader Physicist.
+      2.  Verify that `src/main.ts` and `src/BlackHoleShader.ts` have been updated.
+      3.  Check that uniform names (e.g., `uDiskIntensity`) are consistent between the TypeScript definition and the GLSL declaration.
+      4.  Look for any obvious syntax errors that would prevent the build (e.g., missing semicolons in GLSL, mismatched braces in TS).
+      5.  Confirm that the specific "Black Screen" suspects (ray direction, camera pos, uniform updates) were addressed.
+      6.  If satisfied, approve the mission.
