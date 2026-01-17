@@ -94,7 +94,7 @@ document.addEventListener('keyup', onKeyUp);
 
 // Texture Loader
 const textureLoader = new THREE.TextureLoader();
-const galaxyTexture = textureLoader.load('/galaxy.png');
+const galaxyTexture = textureLoader.load('./galaxy.png');
 galaxyTexture.wrapS = THREE.RepeatWrapping;
 galaxyTexture.wrapT = THREE.MirroredRepeatWrapping;
 
