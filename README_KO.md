@@ -2,6 +2,8 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white)](https://wjgoarxiv.github.io/blackhole-simulator/)
 
+![Blackhole Simulator Preview](public/preview.jpg)
+
 중력 렌즈 효과와 도플러 비밍, 볼류메트릭 강착 원반(Accretion Disk)을 구현한 초현실적 WebGL 블랙홀 시뮬레이션입니다.
 
 ## ✨ 주요 기능
